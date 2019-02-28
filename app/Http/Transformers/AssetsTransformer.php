@@ -31,7 +31,8 @@ class AssetsTransformer
                 'name'=> e($asset->model->name)
             ] : null,
             'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
-            'eol' => ($asset->manufacture_date!='') ? Helper::getFormattedDateObject($asset->present()->eol_date(), 'date') : null ,            
+            'eol' => ($asset->manufacture_date!='') ? Helper::getFormattedDateObject($asset->present()->eol_date(), 'date') : null ,   
+            'depreciation' => (($asset->model) && ($asset->model->depreciation)) ? Helper::getFormattedDateObject($asset->present()->depreciated_date(), 'date') : null,        
             'status_label' => ($asset->assetstatus) ? [
                 'id' => (int) $asset->assetstatus->id,
                 'name'=> e($asset->assetstatus->name),

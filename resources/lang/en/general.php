@@ -75,6 +75,7 @@
     'department'           => 'Department',
     'deployed'				=> 'Deployed',
     'depreciation_report'	=> 'Depreciation Report',
+    'depreciation_date'     => 'Depreciation Date', 
     'details'               => 'Details',
     'download'				=> 'Download',
     'depreciation'			=> 'Depreciation',

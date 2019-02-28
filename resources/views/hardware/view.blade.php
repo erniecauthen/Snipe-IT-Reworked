@@ -413,32 +413,6 @@
                       </tr>
                     @endif
 
-                    @if (($asset->model) && ($asset->model->depreciation->months))
-                      <tr>
-                        <td>{{ trans('admin/hardware/form.depreciation_rate') }}</td>
-                        <td>
-                          {{ $asset->model->asset_depreciation }}
-                          {{ trans('admin/hardware/form.months') }}
-
-                          (
-                          {{ trans('admin/hardware/form.depreciation_date') }}:
-                          {{ $asset->present()->depreciation_date() }}
-                          @if ($asset->present()->months_until_depreciation())
-                            (
-                            @if ($asset->present()->months_until_depreciation()->y > 0) {{ $asset->present()->months_until_depreciation()->y }}
-                            {{ trans('general.years') }},
-                            @endif
-
-                            {{ $asset->present()->months_until_depreciation()->m }}
-                            {{ trans('general.months') }}
-                            )
-                          @endif
-
-                        </td>
-                      </tr>
-                    @endif
-
-
                     @if ($asset->expected_checkin!='')
                       <tr>
                         <td>{{ trans('admin/hardware/form.expected_checkin') }}</td>

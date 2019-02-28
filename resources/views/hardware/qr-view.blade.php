@@ -130,28 +130,27 @@
                     <strong>{{ trans('admin/hardware/form.expires') }}:</strong>
                     {{ $asset->present()->warrantee_expires() }}
                 </div>
-                @endif
+                @endif            
 
-                @if ($asset->depreciation)
+                @if (($asset->model) $$ ($asset->depreciation->months))
                 <div class="col-md-12" style="padding-bottom: 5px;">
-                    <strong>{{ trans('admin/hardware/form.depreciation') }}: </strong>
-                    {{ $asset->depreciation->name }}
-                    ({{ $asset->depreciation->months }}
+                    <strong>{{ trans('admin/hardware/form.depreciation_rate') }}: </strong>
+                    {{ $asset->depreciation->months }}
                     {{ trans('admin/hardware/form.months') }}
-                    )
                 </div>
                 <div class="col-md-12" style="padding-bottom: 5px;">
-                    <strong>{{ trans('admin/hardware/form.fully_depreciated') }}: </strong>
-                    @if ($asset->time_until_depreciated()->y > 0)
-                    {{ $asset->time_until_depreciated()->y }}
-                    {{ trans('admin/hardware/form.years') }},
+                    <strong>{{ trans('admin/hardware/form.depreciation_date') }}: </strong>
+                    {{ $asset->present()->depreciation_date() }}
+                    @if ($asset->present()->months_until_depreciation())
+                        (
+                        @if ($asset->present()->months_until_depreciation()->y > 0) {{ $asset->present()->months_until_depreciation()->y }}
+                        {{ trans('general.years') }},
+                        @endif
+                        {{ $asset->present()->months_until_depreciation()->m }}
+                        {{ trans('general.months') }}
+                        )
                     @endif
-
-                    {{ $asset->time_until_depreciated()->m }}
-                    {{ trans('admin/hardware/form.months') }}
-                    ({{ $asset->depreciated_date()->format('Y-m-d') }})
-                 </div>
-                @endif
+                </div>
 
 
                 @if ($asset->model->eol)
@@ -173,28 +172,7 @@
                         )
                     @endif
                 </div>
-                @endif
-
-                @if ($asset->model->depreciation->months)
-                <div class="col-md-12" style="padding-bottom: 5px;">
-                    <strong>{{ trans('admin/hardware/form.depreciation_rate') }}: </strong>
-                    {{ $asset->model->asset_depreciation }}
-                    {{ trans('admin/hardware/form.months') }}
-                </div>
-                <div class="col-md-12" style="padding-bottom: 5px;">
-                    <strong>{{ trans('admin/hardware/form.depreciation_date') }}: </strong>
-                    {{ $asset->present()->depreciation_date() }}
-                    @if ($asset->present()->months_until_depreciation())
-                        (
-                        @if ($asset->present()->months_until_depreciation()->y > 0) {{ $asset->present()->months_until_depreciation()->y }}
-                        {{ trans('general.years') }},
-                        @endif
-                        {{ $asset->present()->months_until_depreciation()->m }}
-                        {{ trans('general.months') }}
-                        )
-                    @endif
-                </div>
-                @endif                
+                @endif              
             </div>
 
             <div class="col-md-12">

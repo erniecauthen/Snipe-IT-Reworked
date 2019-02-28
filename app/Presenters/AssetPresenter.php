@@ -148,11 +148,11 @@ class AssetPresenter extends Presenter
                 "title" => trans('general.purchase_cost'),
                 "footerFormatter" => 'sumFormatter',
             ], [
-                "field" => "asset_depreciation",
+                "field" => "depreciation",
                 "searchable" => false,
                 "sortable" => false,
                 "visible" => false,
-                "title" => trans('admin/hardware/form.asset_depreciation'),
+                "title" => trans('admin/hardware/form.depreciation_date'),
                 "formatter" => "dateDisplayFormatter"
             ], [
                 "field" => "manufacture_date",
@@ -433,23 +433,17 @@ class AssetPresenter extends Presenter
         return $interval;
     }
 
-    /**
-     * Returns the date this item hits full depreciation.
-     * @return false|string
-     */
-    public function depreciation_date()
+    public function depreciated_date()
     {
-
         if (( $this->purchase_date ) && ( $this->model )) {
             $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->model->model->eol . ' months'));
+            date_add($date, date_interval_create_from_date_string($this->model->depreciation->months . ' months'));
             return date_format($date, 'Y-m-d');
         }
-
     }
 
     /**
-     * How many months until this asset hits full depreciation.
+     * How many months until this asset hits EOL.
      * @return null
      */
     public function months_until_depreciation()
@@ -457,9 +451,9 @@ class AssetPresenter extends Presenter
 
         $today = date("Y-m-d");
         $d1    = new DateTime($today);
-        $d2    = new DateTime($this->depreciation_date());
+        $d2    = new DateTime($this->depreciated_date());
 
-        if ($this->depreciation_date() > $today) {
+        if ($this->depreciated_date() > $today) {
             $interval = $d2->diff($d1);
         } else {
             $interval = null;

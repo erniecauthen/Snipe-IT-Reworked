@@ -175,22 +175,7 @@ class Asset extends Depreciable
         }
 
         return null;
-    }
-
-    public function getDepreciation($value)
-    {
-        $depreciation_id = $this->attributes['depreciation_id'];
-
-        if ($depreciation_id != ''){
-            $depreciation = App\Models\Depreciation::find($depreciation_id);
-        }
-
-        if ($value == '') {
-            $value = 0;
-        }
-
-        $this->attributes['depreciation_id'] = $value;
-    }        
+    } 
 
     public function company()
     {
@@ -1311,19 +1296,17 @@ class Asset extends Depreciable
 
 
     /**
-     * Query builder scope to search on location ID
+     * Query builder scope to search on depreciation ID
      *
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $search      Search term
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
-    public function scopeByDepreciationId($query, $search)
+    public function scopeByDepreciationId($query, $depreciation_id)
     {
         return $query->join('models', 'assets.model_id', '=', 'models.id')
-            ->join('depreciations', 'models.depreciation_id', '=', 'depreciations.id')->where('models.depreciation_id', '=', $search);
+            ->join('depreciations', 'models.depreciation_id', '=', 'depreciations.id')->where('models.depreciation_id', '=', $depreciation_id);
 
-    }
-
-
+    } 
 }
