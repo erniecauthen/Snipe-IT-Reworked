@@ -81,10 +81,9 @@
               <th data-sortable="true" data-field="manufacturer" data-formatter="manufacturersLinkObjFormatter">{{ trans('general.manufacturer') }}</th>
               <th data-sortable="true" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
               <th data-sortable="true" data-field="assets_count">{{ trans('admin/models/table.numassets') }}</th>
-              <?php //<th data-sortable="false" data-field="depreciation" data-formatter="depreciationsLinkObjFormatter">{{ trans('general.depreciation') }}</th> ?>
+              <th data-sortable="false" data-field="depreciation" data-formatter="depreciationsLinkObjFormatter">{{ trans('general.depreciation') }}</th>
               <th data-sortable="false" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
               <th data-sortable="true" data-field="eol">{{ trans('general.eol') }}</th>
-              <th data-sortable="true" data-field="asset_depreciation">{{ trans('admin/hardware/form.asset_depreciation')) }}</th>
               <th data-sortable="false" data-field="fieldset" data-formatter="fieldsetsLinkObjFormatter">{{ trans('admin/models/general.fieldset') }}</th>
               <th data-sortable="true" data-field="notes">{{ trans('general.notes') }}</th>
               <th data-switchable="false" data-formatter="modelsActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>

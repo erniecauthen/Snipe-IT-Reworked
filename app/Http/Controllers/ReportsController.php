@@ -135,7 +135,6 @@ class ReportsController extends Controller
             trans('admin/hardware/table.serial'),
             trans('admin/hardware/table.checkoutto'),
             trans('admin/hardware/table.location'),
-            trans('admin/hardware/table.manufacture_date'),
             trans('admin/hardware/table.purchase_date'),
             trans('admin/hardware/table.purchase_cost'),
             trans('admin/hardware/table.book_value'),
@@ -176,8 +175,7 @@ class ReportsController extends Controller
                 $currency = e(Setting::first()->default_currency);
             }
 
-            $row[] = $asset->manufacture_date;
-            $row[] = $asset->purchase_date;            
+            $row[] = $asset->purchase_date;
             $row[] = $currency . Helper::formatCurrencyOutput($asset->purchase_cost);
             $row[] = $currency . Helper::formatCurrencyOutput($asset->getDepreciatedValue());
             $row[] = $currency . Helper::formatCurrencyOutput(( $asset->purchase_cost - $asset->getDepreciatedValue() ));
@@ -252,7 +250,7 @@ class ReportsController extends Controller
             trans('admin/licenses/table.serial'),
             trans('admin/licenses/form.seats'),
             trans('admin/licenses/form.remaining_seats'),
-            trans('admin/licenses/form.expiration'),            
+            trans('admin/licenses/form.expiration'),
             trans('general.purchase_date'),
             trans('general.depreciation'),
             trans('general.purchase_cost')
@@ -351,11 +349,6 @@ class ReportsController extends Controller
             if ($request->has('serial')) {
                 $header[] = trans('admin/hardware/table.serial');
             }
-
-            if ($request->has('manufacture_date')) {
-                $header[] = trans('admin/hardware/table.manufacture_date');
-            }
-
             if ($request->has('purchase_date')) {
                 $header[] = trans('admin/hardware/table.purchase_date');
             }
@@ -515,10 +508,6 @@ class ReportsController extends Controller
                 $assets->where('assets.status_id', $request->input('by_status_id'));
             }
 
-            if (($request->has('manufacture_start')) && ($request->has('manufacture_end'))) {
-                $assets->whereBetween('assets.manufacture_date', [$request->input('manufacture_start'), $request->input('manufacture_end')]);
-            }       
-
             if (($request->has('purchase_start')) && ($request->has('purchase_end'))) {
                 $assets->whereBetween('assets.purchase_date', [$request->input('purchase_start'), $request->input('purchase_end')]);
             }
@@ -565,10 +554,6 @@ class ReportsController extends Controller
                         $row[] = ($asset->serial) ? $asset->serial : '';
                     }
 
-                    if ($request->has('manufacture_date')) {
-                        $row[] = ($asset->manufacture_date) ? $asset->manufacture_date : '';
-                    }
-
                     if ($request->has('purchase_date')) {
                         $row[] = ($asset->purchase_date) ? $asset->purchase_date : '';
                     }
@@ -578,11 +563,7 @@ class ReportsController extends Controller
                     }
 
                     if ($request->has('eol')) {
-                        $row[] = ($asset->manufacture_date!='') ? $asset->present()->eol_date() : '';
-                    }
-
-                    if ($request->has('asset_depreciation')) {
-                        $row[] = ($asset->purchase_date!='') ? $asset->present()->depreciation_date() : '';
+                        $row[] = ($asset->purchase_date!='') ? $asset->present()->eol_date() : '';
                     }
 
                     if ($request->has('order')) {

@@ -413,7 +413,7 @@
                       </tr>
                     @endif
 
-                    @if (($asset->model) && ($asset->model->depreciation->months))
+                    @if (($asset->model) && ($asset->model->asset_depreciation))
                       <tr>
                         <td>{{ trans('admin/hardware/form.depreciation_rate') }}</td>
                         <td>

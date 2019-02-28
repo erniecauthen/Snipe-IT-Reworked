@@ -31,7 +31,6 @@
                     <th class="col-sm-1">{{ trans('admin/hardware/table.checkoutto') }}</th>
                     <th class="col-sm-1">{{ trans('admin/hardware/table.location') }}</th>
                     <th class="col-sm-1">{{ trans('admin/hardware/table.purchase_date') }}</th>
-                    <th class="col-sm-1">{{ trans('admin/hardware/table.manufacture_date') }}</th>
                     <th class="col-sm-1">{{ trans('admin/hardware/table.eol') }}</th>
                     <th class="col-sm-1">{{ trans('admin/hardware/table.purchase_cost') }}</th>
                     <th class="col-sm-1">{{ trans('admin/hardware/table.book_value') }}</th>
@@ -63,10 +62,6 @@
                         @if ($asset->model->eol) {{ $asset->present()->eol_date() }}
                         @endif
                     </td>
-                    <td>
-                        @if ($asset->model->asset_depreciation) {{ $asset->present()->depreciation_date() }}
-                        @endif
-                    </td>                    
 
                     @if ($asset->purchase_cost > 0)
                     <td class="align-right">

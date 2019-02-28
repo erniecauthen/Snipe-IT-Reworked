@@ -93,22 +93,10 @@
             </div>
             <div class="checkbox col-md-12">
               <label>
-                {{ Form::checkbox('manufacture_date', '1', '1', ['class' => 'minimal']) }}
-                {{ trans('admin/hardware/table.manufacture_date') }}
-              </label>
-            </div>
-            <div class="checkbox col-md-12">
-              <label>
                 {{ Form::checkbox('eol', '1', '1', ['class' => 'minimal']) }}
                 {{ trans('admin/hardware/table.eol') }}
               </label>
             </div>
-            <div class="checkbox col-md-12">
-              <label>
-                {{ Form::checkbox('asset_depreciation', '1', '1', ['class' => 'minimal']) }}
-                {{ trans('admin/hardware/table.asset_depreciation') }}
-              </label>
-            </div> 
             <div class="checkbox col-md-12">
               <label>
                 {{ Form::checkbox('order', '1', '1', ['class' => 'minimal']) }}
@@ -306,16 +294,6 @@
                 <input type="text" class="input-sm form-control" name="purchase_end" />
               </div>
             </div>
-
-          <!-- Manufacture Date -->
-          <div class="form-group manufacture-range">
-              <label for="manufacture_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.manufacture_date') }} Range</label>
-              <div class="input-daterange input-group col-md-6" id="datepicker">
-                <input type="text" class="input-sm form-control" name="purchase_start" />
-                <span class="input-group-addon">to</span>
-                <input type="text" class="input-sm form-control" name="purchase_end" />
-              </div>
-            </div>            
 
             <!-- Created Date -->
             <div class="form-group purchase-range">
